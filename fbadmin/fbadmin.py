@@ -61,7 +61,7 @@ class Applicant(object):
 
 class Member(object):
 
-    def __init__(self, member_id, name, url, member_since):
+    def __init__(self, member_id, name, url):
         """
         Member class
         Attributes
@@ -72,7 +72,7 @@ class Member(object):
         self.member_id = member_id
         self.name = name
         self.url = url
-        self.member_since = member_since
+        #self.member_since = member_since
 
 
 class FBGroup(object):
@@ -162,10 +162,10 @@ class FBGroup(object):
     def parse_member(self, container):
         d = container.text.split('\n')
         name = d[0]
-        member_since = convert_epoch_to_timestamp_string(container.find_element_by_tag_name('abbr').get_attribute('data-utime'))
+        #member_since = convert_epoch_to_timestamp_string(container.find_element_by_tag_name('abbr').get_attribute('data-utime'))
         url = container.find_element_by_link_text(name).get_attribute('href')
         member_id = self.parse_id(container, name)
-        return member_id, name, url, member_since
+        return member_id, name, url
 
     def convert_epoch_to_timestamp_string(self, epoch):
         t = datetime.datetime.fromtimestamp(float(epoch))
